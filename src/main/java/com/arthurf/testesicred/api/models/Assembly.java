@@ -22,6 +22,9 @@ public class Assembly implements Serializable {
     @DBRef
     private Set<Agenda> agendas = new HashSet<>();
 
+    @DBRef
+    private Set<Member> members = new HashSet<>();
+
     public UUID getId() {
         return id;
     }
@@ -36,5 +39,13 @@ public class Assembly implements Serializable {
 
     public void setAgendas(Set<Agenda> agendas) {
         this.agendas = agendas;
+    }
+
+    public Set<Member> getMembers() {
+        return members;
+    }
+
+    public void setMembers(Set<Member> members) {
+        this.members = members;
     }
 }
