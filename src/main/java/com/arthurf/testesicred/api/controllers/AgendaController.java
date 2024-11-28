@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.arthurf.testesicred.api.dtos.CreateAgendaDTO;
 import com.arthurf.testesicred.api.models.Agenda;
 import com.arthurf.testesicred.api.services.CreateAgendaService;
-import com.arthurf.testesicred.api.services.FindAllAgendas;
+import com.arthurf.testesicred.api.services.FindAllAgendasService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import reactor.core.publisher.Flux;
@@ -29,7 +29,7 @@ public class AgendaController {
     private CreateAgendaService createAgendaService;
 
     @Autowired
-    private FindAllAgendas findAllAgendas;
+    private FindAllAgendasService findAllAgendas;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)

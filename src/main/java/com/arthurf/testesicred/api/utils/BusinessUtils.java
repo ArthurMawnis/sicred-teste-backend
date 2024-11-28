@@ -33,4 +33,18 @@ public class BusinessUtils {
     public static boolean isUUID(String uuid) {
         return uuid.matches("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$");
     }
+
+    /**
+     * Generate a random CPF.
+     * DOESNT GARANTEE A VALID CPF.
+     * 
+     * @return a random CPF.
+     */
+    public static String generateRandomCPF() {
+        final var cpf = new StringBuilder();
+        for (int i = 0; i < 11; i++) {
+            cpf.append((int) (Math.random() * 10));
+        }
+        return cpf.toString();
+    }
 }
