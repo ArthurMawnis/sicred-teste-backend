@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.arthurf.testesicred.api.exceptions.BusinessException;
 import com.arthurf.testesicred.api.models.Assembly;
 import com.arthurf.testesicred.api.models.Member;
 import com.arthurf.testesicred.api.repositories.AssemblyRepository;
@@ -15,6 +17,9 @@ import com.arthurf.testesicred.api.repositories.MemberRepository;
 
 import reactor.core.publisher.Mono;
 
+/**
+ * Service to create a mock assembly.
+ */
 @Service
 public class CreateMockAssemblyService {
 
@@ -50,7 +55,7 @@ public class CreateMockAssemblyService {
             assemblyRepository.save(assembly);
             return Mono.just(assembly);
         } else {
-            throw new RuntimeException("There is already an assembly in the database");
+            throw new BusinessException("There is already an assembly in the database", HttpStatus.PRECONDITION_FAILED);
         }
     }
 }
