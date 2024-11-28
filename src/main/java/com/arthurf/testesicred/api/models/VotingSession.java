@@ -14,7 +14,7 @@ import com.arthurf.testesicred.api.models.enums.VotingSessionStatusEnum;
  * Model class for VotingSession entity
  */
 @Document(collection = "voting_sessions")
-public class VotingSession implements Serializable {
+public class VotingSession {
 
     @Id()
     private UUID id;
@@ -22,6 +22,15 @@ public class VotingSession implements Serializable {
     private String agendaId;
     private Long duration;
     private VotingSessionStatusEnum status;
+
+    /**
+     * Checks if the voting session is open.
+     * 
+     * @return true if the voting session is open, false otherwise.
+     */
+    public boolean isOpen() {
+        return VotingSessionStatusEnum.OPEN.equals(status);
+    }
 
     public UUID getId() {
         return id;
@@ -54,5 +63,4 @@ public class VotingSession implements Serializable {
     public void setStatus(VotingSessionStatusEnum status) {
         this.status = status;
     }
-
 }

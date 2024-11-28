@@ -1,6 +1,5 @@
 package com.arthurf.testesicred.api.models;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -14,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Models the cooperative assemblies.
  */
 @Document(collection = "assemblies")
-public class Assembly implements Serializable {
+public class Assembly {
 
     @Id()
     private UUID id;
