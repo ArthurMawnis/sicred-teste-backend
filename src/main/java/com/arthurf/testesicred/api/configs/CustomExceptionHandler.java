@@ -11,7 +11,7 @@ import com.arthurf.testesicred.api.exceptions.BusinessException;
 /**
  * Parse exceptions and return a proper response.
  */
-@ControllerAdvice
+@ControllerAdvice()
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
