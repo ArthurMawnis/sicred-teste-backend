@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.arthurf.testesicred.api.models.Assembly;
 import com.arthurf.testesicred.api.services.CreateMockAssemblyService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -21,6 +22,7 @@ public class AssemblyController {
 
     @PostMapping("mock-data")
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create a mock assembly.", description = "Create a mock assembly.")
     public Mono<Assembly> createMockAssembly() {
         return createMockAssemblyService.execute();
     }

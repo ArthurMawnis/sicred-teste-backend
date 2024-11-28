@@ -9,5 +9,4 @@ import com.arthurf.testesicred.api.models.Assembly;
 
 @Repository
 public interface AssemblyRepository extends MongoRepository<Assembly, UUID> {
-
 }
