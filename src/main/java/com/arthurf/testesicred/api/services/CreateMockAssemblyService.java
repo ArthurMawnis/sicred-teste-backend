@@ -14,6 +14,7 @@ import com.arthurf.testesicred.api.models.Assembly;
 import com.arthurf.testesicred.api.models.Member;
 import com.arthurf.testesicred.api.repositories.AssemblyRepository;
 import com.arthurf.testesicred.api.repositories.MemberRepository;
+import com.arthurf.testesicred.api.utils.BusinessUtils;
 
 import reactor.core.publisher.Mono;
 
@@ -46,6 +47,7 @@ public class CreateMockAssemblyService {
             for (int i = 0; i < membersCount; i++) {
                 final var member = new Member();
                 member.setId(UUID.randomUUID());
+                member.setCpf(BusinessUtils.generateRandomCPF());
                 members.add(member);
             }
 
