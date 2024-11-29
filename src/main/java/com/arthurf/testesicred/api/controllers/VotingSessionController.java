@@ -16,6 +16,7 @@ import com.arthurf.testesicred.api.services.CreateVoteService;
 import com.arthurf.testesicred.api.services.CreateVotingSessionService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import reactor.core.publisher.Mono;
 
 /**
@@ -41,8 +42,9 @@ public class VotingSessionController {
 
     @PostMapping("/{id}/vote")
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Vote in a voting session.", description = "Vote in a voting session for a specific agenda.")
     public Mono<Void> doVote(
-            @PathVariable("id") final String votingSessionId,
+            @PathVariable("id") @Schema(name = "id", description = "The voting session id") final String votingSessionId,
             @RequestBody() final CreateVoteDTO createVoteDTO) {
         createVoteService.execute(votingSessionId, createVoteDTO);
         return Mono.empty();
