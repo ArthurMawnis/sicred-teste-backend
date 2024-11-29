@@ -21,4 +21,12 @@ public interface VotingSessionRepository extends MongoRepository<VotingSession, 
      */
     List<VotingSession> findByAgendaIdAndStatus(final String agendaId, final VotingSessionStatusEnum status);
 
+    /**
+     * Find all voting sessions by status
+     * 
+     * @param status The status of the voting session
+     * @return The list of voting sessions
+     */
+    List<VotingSession> findAllByStatus(final VotingSessionStatusEnum status);
+
 }
