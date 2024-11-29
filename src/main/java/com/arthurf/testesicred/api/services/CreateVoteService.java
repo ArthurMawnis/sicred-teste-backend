@@ -138,6 +138,10 @@ public class CreateVoteService {
             errors.add("The voting session id is required.");
         }
 
+        if (!BusinessUtils.isUUID(createVoteDTO.getMemberId())) {
+            errors.add("The member id is invalid.");
+        }
+
         if (ObjectUtils.isEmpty(createVoteDTO)) {
             errors.add("The vote data is required.");
         } else {

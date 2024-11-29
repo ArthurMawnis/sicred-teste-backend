@@ -114,8 +114,9 @@ public class CreateVotingSessionService {
             return errors;
         }
 
-        if (createVotingSessionDTO.getDuration() != null && createVotingSessionDTO.getDuration() < 60) {
-            errors.add("The duration of the voting session must be at least 60 seconds.");
+        if (createVotingSessionDTO.getDuration() != null
+                && createVotingSessionDTO.getDuration() < Long.valueOf(defaultDuration)) {
+            errors.add("The duration of the voting session must be at least " + defaultDuration + " seconds.");
         }
 
         if (!agendaRepository.existsById(UUID.fromString(createVotingSessionDTO.getAgendaId()))) {
