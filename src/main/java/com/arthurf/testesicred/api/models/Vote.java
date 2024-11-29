@@ -1,5 +1,8 @@
 package com.arthurf.testesicred.api.models;
 
+import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,6 +14,8 @@ public class Vote {
     @Id()
     private VotePk id;
     private Boolean isPositive;
+    @CreatedDate
+    private LocalDateTime createdAt;
 
     public VotePk getId() {
         return id;
@@ -26,5 +31,13 @@ public class Vote {
 
     public void setPositive(Boolean isPositive) {
         this.isPositive = isPositive;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

@@ -1,9 +1,11 @@
 package com.arthurf.testesicred.api.models;
 
-import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.arthurf.testesicred.api.models.enums.VotingSessionStatusEnum;
@@ -22,6 +24,11 @@ public class VotingSession {
     private String agendaId;
     private Long duration;
     private VotingSessionStatusEnum status;
+    private LocalDateTime startedAt;
+    @CreatedDate
+    private LocalDateTime createdAt;
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 
     /**
      * Checks if the voting session is open.
@@ -30,6 +37,15 @@ public class VotingSession {
      */
     public boolean isOpen() {
         return VotingSessionStatusEnum.OPEN.equals(status);
+    }
+
+    /**
+     * Checks if the voting session is expired.
+     * 
+     * @return true if the voting session is expired
+     */
+    public boolean isExpired() {
+        return LocalDateTime.now().isAfter(startedAt.plusSeconds(duration));
     }
 
     public UUID getId() {
@@ -63,4 +79,29 @@ public class VotingSession {
     public void setStatus(VotingSessionStatusEnum status) {
         this.status = status;
     }
+
+    public LocalDateTime getStartedAt() {
+        return startedAt;
+    }
+
+    public void setStartedAt(LocalDateTime startedAt) {
+        this.startedAt = startedAt;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
 }
