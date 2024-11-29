@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.arthurf.testesicred.api.dtos.CreateVotingSessionResultDTO;
+import com.google.gson.Gson;
 
 /**
  * Service for publishing a message to the RabbitMQ server.
@@ -33,6 +34,8 @@ public class PublishVotingSessionResultService {
      * @param message The message to be published.
      */
     public void publishMessage(final CreateVotingSessionResultDTO message) {
-        amqpTemplate.convertAndSend(queue, message);
+        amqpTemplate.convertAndSend(queue, new Gson().toJson(message));
+        System.out.println("Message published: " + message);
+        System.out.println("Queue: " + queue);
     }
 }

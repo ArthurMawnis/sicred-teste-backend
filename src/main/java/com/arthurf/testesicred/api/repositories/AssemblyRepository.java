@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import com.arthurf.testesicred.api.models.Assembly;
 
+/**
+ * Repository for Assembly entity
+ */
 @Repository
 public interface AssemblyRepository extends MongoRepository<Assembly, UUID> {
 }

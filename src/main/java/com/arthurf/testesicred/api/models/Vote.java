@@ -8,6 +8,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.arthurf.testesicred.api.models.pks.VotePk;
 
+/**
+ * Vote
+ * 
+ * Model class for Vote
+ */
 @Document(collection = "votes")
 public class Vote {
 

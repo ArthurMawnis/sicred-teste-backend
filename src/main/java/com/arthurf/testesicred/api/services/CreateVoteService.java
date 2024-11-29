@@ -134,6 +134,11 @@ public class CreateVoteService {
 
         final List<String> errors = new ArrayList<>();
 
+        if (ObjectUtils.isEmpty(createVoteDTO)) {
+            errors.add("The vote data is required.");
+            return errors;
+        }
+
         if (ObjectUtils.isEmpty(votingSessionId)) {
             errors.add("The voting session id is required.");
         }
@@ -142,15 +147,11 @@ public class CreateVoteService {
             errors.add("The member id is invalid.");
         }
 
-        if (ObjectUtils.isEmpty(createVoteDTO)) {
-            errors.add("The vote data is required.");
-        } else {
-            if (ObjectUtils.isEmpty(createVoteDTO.getMemberId())) {
-                errors.add("The member id is required.");
-            }
-            if (ObjectUtils.isEmpty(createVoteDTO.getVoteValue())) {
-                errors.add("The vote value is required.");
-            }
+        if (ObjectUtils.isEmpty(createVoteDTO.getMemberId())) {
+            errors.add("The member id is required.");
+        }
+        if (ObjectUtils.isEmpty(createVoteDTO.getVoteValue())) {
+            errors.add("The vote value is required.");
         }
 
         return errors;
