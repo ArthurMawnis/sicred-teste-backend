@@ -45,6 +45,10 @@ public class VotingSession {
      * @return true if the voting session is expired
      */
     public boolean isExpired() {
+        if (startedAt == null) {
+            return false;
+        }
+
         return LocalDateTime.now().isAfter(startedAt.plusSeconds(duration));
     }
 
