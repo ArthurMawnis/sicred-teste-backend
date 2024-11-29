@@ -15,7 +15,7 @@ public class CreateVotingSessionDTO implements Serializable {
     @NotNull(message = "The id of the agenda is required.")
     private String agendaId;
 
-    @Schema(description = "The duration of the voting session in milliseconds.", example = "60000")
+    @Schema(description = "The duration of the voting session in seconds.", example = "60")
     @Nullable
     private Long duration;
 

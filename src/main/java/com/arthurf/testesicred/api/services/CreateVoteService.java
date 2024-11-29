@@ -70,6 +70,10 @@ public class CreateVoteService {
             throw new BusinessException("The voting session is closed.", HttpStatus.PRECONDITION_FAILED);
         }
 
+        if (votingSession.isExpired()) {
+            throw new BusinessException("The voting session has expired.", HttpStatus.PRECONDITION_FAILED);
+        }
+
         final boolean alreadyVoted = verifyIfalreadyVoted(createVoteDTO.getMemberId(), votingSession.getAgendaId());
 
         if (alreadyVoted) {

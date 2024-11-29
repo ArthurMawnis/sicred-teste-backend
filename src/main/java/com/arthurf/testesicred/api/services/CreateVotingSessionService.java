@@ -1,5 +1,6 @@
 package com.arthurf.testesicred.api.services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -35,6 +36,9 @@ public class CreateVotingSessionService {
     @Autowired
     private AgendaRepository agendaRepository;
 
+    /**
+     * Default duration for the voting session in seconds.
+     */
     @Value("${domain.voting-session.default-duration}")
     private String defaultDuration;
 
@@ -67,6 +71,7 @@ public class CreateVotingSessionService {
         votingSession.setDuration(
                 ObjectUtils.isEmpty(createVotingSessionDTO.getDuration()) ? defaultDurationAsNumber
                         : createVotingSessionDTO.getDuration());
+        votingSession.setStartedAt(LocalDateTime.now());
         // Due to the simplicity, we are assuming the voting session start immediately
         votingSession.setStatus(VotingSessionStatusEnum.OPEN);
 
@@ -109,8 +114,8 @@ public class CreateVotingSessionService {
             return errors;
         }
 
-        if (createVotingSessionDTO.getDuration() != null && createVotingSessionDTO.getDuration() < 1) {
-            errors.add("The duration of the voting session must be greater than zero.");
+        if (createVotingSessionDTO.getDuration() != null && createVotingSessionDTO.getDuration() < 60) {
+            errors.add("The duration of the voting session must be at least 60 seconds.");
         }
 
         if (!agendaRepository.existsById(UUID.fromString(createVotingSessionDTO.getAgendaId()))) {
