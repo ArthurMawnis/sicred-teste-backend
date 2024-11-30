@@ -1,5 +1,7 @@
 package com.arthurf.testesicred.api.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,14 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.arthurf.testesicred.api.models.Assembly;
 import com.arthurf.testesicred.api.models.Member;
 import com.arthurf.testesicred.api.services.CreateMockAssemblyService;
 import com.arthurf.testesicred.api.services.FindMembersService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/assemblies")
@@ -31,7 +31,7 @@ public class AssemblyController {
     @PostMapping("mock-data")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a mock assembly.", description = "Create a mock assembly.")
-    public Mono<Assembly> createMockAssembly() {
+    public Flux<List<Member>> createMockAssembly() {
         return createMockAssemblyService.execute();
     }
 
