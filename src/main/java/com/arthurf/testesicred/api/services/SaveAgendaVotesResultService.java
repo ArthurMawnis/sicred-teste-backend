@@ -42,8 +42,8 @@ public class SaveAgendaVotesResultService {
                     .orElseThrow(
                             () -> new BusinessException("Agenda not longer exists", HttpStatus.PRECONDITION_FAILED));
 
-            final Long positiveVotes = voteRepository.countByIdAgendaIdAndIsPositive(agenda.getId(), true);
-            final Long negativeVotes = voteRepository.countByIdAgendaIdAndIsPositive(agenda.getId(), false);
+            final Long positiveVotes = voteRepository.countByIdAgendaIdAndIsPositive(agenda.getId().toString(), true);
+            final Long negativeVotes = voteRepository.countByIdAgendaIdAndIsPositive(agenda.getId().toString(), false);
 
             final AgendaVotingResult result = new AgendaVotingResult();
             result.setId(UUID.randomUUID());
