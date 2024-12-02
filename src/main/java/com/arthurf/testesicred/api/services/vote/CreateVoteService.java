@@ -8,11 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import com.arthurf.testesicred.api.clients.CpfApiClient;
 import com.arthurf.testesicred.api.dtos.CreateVoteDTO;
+import com.arthurf.testesicred.api.dtos.ValidateCpfResponseDTO;
 import com.arthurf.testesicred.api.exceptions.BusinessException;
+import com.arthurf.testesicred.api.models.Member;
 import com.arthurf.testesicred.api.models.Vote;
 import com.arthurf.testesicred.api.models.VotingSession;
+import com.arthurf.testesicred.api.models.enums.ValidateCpfStatusEnum;
 import com.arthurf.testesicred.api.models.pks.VotePk;
 import com.arthurf.testesicred.api.repositories.MemberRepository;
 import com.arthurf.testesicred.api.repositories.VoteRepository;
@@ -26,6 +31,9 @@ import reactor.core.publisher.Mono;
  */
 @Service
 public class CreateVoteService {
+
+    @Autowired
+    private CpfApiClient cpfApiClient;
 
     @Autowired
     private VotingSessionRepository votingSessionRepository;
@@ -58,11 +66,10 @@ public class CreateVoteService {
             throw new BusinessException(BusinessUtils.parseErrorsList(errors), HttpStatus.BAD_REQUEST);
         }
 
-        final boolean memberExists = memberRepository.existsById(UUID.fromString(createVoteDTO.getMemberId()));
+        final Member member = memberRepository.findById(UUID.fromString(createVoteDTO.getMemberId())).orElseThrow(
+                () -> new BusinessException("The member does not exist.", HttpStatus.NOT_FOUND));
 
-        if (!memberExists) {
-            throw new BusinessException("The member does not exist.", HttpStatus.NOT_FOUND);
-        }
+        checkForCpfValidation(member.getCpf());
 
         final VotingSession votingSession = findVotingSession(votingSessionId);
 
@@ -119,6 +126,31 @@ public class CreateVoteService {
      */
     private boolean verifyIfalreadyVoted(final String memberId, final String agendaId) {
         return voteRepository.findById(new VotePk(agendaId, memberId)).isPresent();
+    }
+
+    /**
+     * Checks if the CPF is valid.
+     * 
+     * @param cpf The CPF to be validated.
+     */
+    private void checkForCpfValidation(final String cpf) {
+        try {
+            final ValidateCpfResponseDTO validator = cpfApiClient.checkCpf(cpf);
+
+            if (!ValidateCpfStatusEnum.ABLE_TO_VOTE.equals(validator.getStatus())) {
+                throw new BusinessException("The member is unable to vote.", HttpStatus.PRECONDITION_FAILED);
+            }
+
+        } catch (WebClientResponseException wcre) {
+            if (wcre.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+                throw new BusinessException("The CPF is invalid.", HttpStatus.BAD_REQUEST);
+            } else {
+                throw new BusinessException("An error occurred while validating the CPF.", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } catch (Exception e) {
+            throw new BusinessException("An error occurred while validating the CPF.", HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+
     }
 
     /**
