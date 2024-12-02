@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -15,6 +16,9 @@ public class AgendaVotingResult {
 
     @Id()
     private UUID id;
+    @Version()
+    private Long version;
+
     private UUID agendaId;
     private Long yesVotes;
     private Long noVotes;
@@ -27,6 +31,14 @@ public class AgendaVotingResult {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public UUID getAgendaId() {

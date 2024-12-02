@@ -22,8 +22,6 @@ public class CloseVotingSessionJobService {
 
     @Scheduled(cron = "*/10 * * * * *")
     public void checkVotingSession() {
-        System.out.println("Checking voting session");
-
         // Supposing this list to be small, we can filter the open sessions and then
         // filter the expired ones
         final List<VotingSession> openSessions = votingSessionRepository.findAllByStatus(VotingSessionStatusEnum.OPEN);

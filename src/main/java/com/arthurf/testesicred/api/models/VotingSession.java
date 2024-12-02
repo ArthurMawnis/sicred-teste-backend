@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.arthurf.testesicred.api.models.enums.VotingSessionStatusEnum;
@@ -20,15 +21,14 @@ public class VotingSession {
 
     @Id()
     private UUID id;
-
+    @Version()
+    private Long version;
     private String agendaId;
     private Long duration;
     private VotingSessionStatusEnum status;
     private LocalDateTime startedAt;
     @CreatedDate
     private LocalDateTime createdAt;
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
 
     /**
      * Checks if the voting session is open.
@@ -58,6 +58,14 @@ public class VotingSession {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public String getAgendaId() {
@@ -98,14 +106,6 @@ public class VotingSession {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
 }

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.arthurf.testesicred.api.models.pks.VotePk;
@@ -18,6 +19,8 @@ public class Vote {
 
     @Id()
     private VotePk id;
+    @Version()
+    private Long version;
     private Boolean isPositive;
     @CreatedDate
     private LocalDateTime createdAt;
@@ -28,6 +31,14 @@ public class Vote {
 
     public void setId(VotePk id) {
         this.id = id;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public Boolean isPositive() {
