@@ -1,6 +1,7 @@
 package com.arthurf.testesicred.api.repositories;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -29,4 +30,11 @@ public interface VotingSessionRepository extends MongoRepository<VotingSession, 
      */
     List<VotingSession> findAllByStatus(final VotingSessionStatusEnum status);
 
+    /**
+     * Find a voting session by the agenda id
+     * 
+     * @param agendaId The agenda id
+     * @return The voting session
+     */
+    List<VotingSession> findAllByAgendaId(String agendaId);
 }

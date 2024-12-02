@@ -31,7 +31,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler({ BusinessException.class })
     public ResponseEntity<Object> handleGenericException(final BusinessException e) {
-        classLogger.error(e.getMessage(), e);
+        classLogger.debug(e.getMessage(), e);
         return ResponseEntity.status(e.getStatusCode()).body(getResponseBody(e.getMessage()));
     }
 

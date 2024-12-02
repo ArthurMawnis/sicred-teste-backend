@@ -141,15 +141,19 @@ public class CreateVoteService {
                 throw new BusinessException("The member is unable to vote.", HttpStatus.PRECONDITION_FAILED);
             }
 
+        } catch (BusinessException be) {
+            throw be;
         } catch (WebClientResponseException wcre) {
             if (wcre.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
                 throw new BusinessException("The CPF is invalid.", HttpStatus.BAD_REQUEST);
             } else {
+                wcre.printStackTrace();
                 throw new BusinessException("An error occurred while validating the CPF.",
                         HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } catch (Exception e) {
-            throw new BusinessException("An error occurred while validating the CPF.",
+            e.printStackTrace();
+            throw new BusinessException("An unexpected error occurred while validating the CPF.",
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

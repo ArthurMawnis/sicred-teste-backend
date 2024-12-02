@@ -1,5 +1,6 @@
 package com.arthurf.testesicred.api.services.member;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,12 @@ public class CreateMemberService {
      * @return The created member.
      */
     public Mono<Member> execute(final CreateMemberDTO createMemberDTO) {
-        memberRepository.findByCpf(createMemberDTO.getCpf()).blockOptional()
-                .orElseThrow(
-                        () -> new BusinessException("A member with this cpf is already registered.",
-                                HttpStatus.CONFLICT));
+        final Optional<Member> alreadyExistingMember = memberRepository.findByCpf(createMemberDTO.getCpf());
+
+        if (alreadyExistingMember.isPresent()) {
+            throw new BusinessException("A member with this cpf is already registered.",
+                    HttpStatus.CONFLICT);
+        }
 
         final Member member = new Member();
         member.setCpf(createMemberDTO.getCpf());

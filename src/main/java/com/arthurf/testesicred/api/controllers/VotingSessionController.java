@@ -2,6 +2,7 @@ package com.arthurf.testesicred.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,9 +15,11 @@ import com.arthurf.testesicred.api.dtos.CreateVotingSessionDTO;
 import com.arthurf.testesicred.api.models.VotingSession;
 import com.arthurf.testesicred.api.services.vote.CreateVoteService;
 import com.arthurf.testesicred.api.services.vote.CreateVotingSessionService;
+import com.arthurf.testesicred.api.services.vote.FindVotingSessionService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -31,6 +34,9 @@ public class VotingSessionController {
 
     @Autowired
     private CreateVoteService createVoteService;
+
+    @Autowired
+    private FindVotingSessionService findVotingSessionService;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -48,5 +54,13 @@ public class VotingSessionController {
             @RequestBody() final CreateVoteDTO createVoteDTO) {
         createVoteService.execute(votingSessionId, createVoteDTO);
         return Mono.empty();
+    }
+
+    @GetMapping("/agenda/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Find a voting session.", description = "Find a voting session by its agenda.")
+    public Flux<VotingSession> findVotingSession(
+            @PathVariable("id") @Schema(name = "id", description = "The voting session's agenda id") final String agendaId) {
+        return findVotingSessionService.execute(agendaId);
     }
 }
