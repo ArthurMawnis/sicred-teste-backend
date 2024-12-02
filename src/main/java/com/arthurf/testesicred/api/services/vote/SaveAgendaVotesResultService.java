@@ -2,6 +2,8 @@ package com.arthurf.testesicred.api.services.vote;
 
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ import com.arthurf.testesicred.api.repositories.VotingSessionRepository;
 
 @Service
 public class SaveAgendaVotesResultService {
+
+    Logger classLogger = LoggerFactory.getLogger(SaveAgendaVotesResultService.class);
 
     @Autowired
     private AgendaRepository agendaRepository;
@@ -53,8 +57,8 @@ public class SaveAgendaVotesResultService {
 
             agendaVotingResultRepository.save(result);
         } catch (BusinessException ignorable) {
-            System.out.println(ignorable.getMessage());
-            // Do nothing
+            // Nothing we can do here
+            classLogger.error(ignorable.getMessage(), ignorable);
         }
 
     }

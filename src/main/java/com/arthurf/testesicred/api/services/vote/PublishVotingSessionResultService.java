@@ -1,5 +1,7 @@
 package com.arthurf.testesicred.api.services.vote;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +17,8 @@ import com.google.gson.Gson;
 public class PublishVotingSessionResultService {
 
     private final AmqpTemplate amqpTemplate;
+
+    Logger classLogger = LoggerFactory.getLogger(PublishVotingSessionResultService.class);
 
     @Value("${rabbitmq.queue}")
     private String queue;
@@ -34,8 +38,11 @@ public class PublishVotingSessionResultService {
      * @param message The message to be published.
      */
     public void publishMessage(final CreateVotingSessionResultDTO message) {
-        amqpTemplate.convertAndSend(queue, new Gson().toJson(message));
-        System.out.println("Message published: " + message);
-        System.out.println("Queue: " + queue);
+        try {
+            amqpTemplate.convertAndSend(queue, new Gson().toJson(message));
+        } catch (Exception e) {
+            classLogger.error(e.getMessage(), e);
+        }
+
     }
 }

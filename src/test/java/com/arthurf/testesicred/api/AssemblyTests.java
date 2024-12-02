@@ -6,6 +6,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -20,6 +22,8 @@ import com.arthurf.testesicred.api.services.member.CreateMockAssemblyService;
 @SpringBootTest(classes = ApiApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class AssemblyTests {
 
+    Logger classLogger = LoggerFactory.getLogger(AssemblyTests.class);
+
     @Autowired
     private CreateMockAssemblyService createMockAssemblyService;
 
@@ -31,12 +35,11 @@ public class AssemblyTests {
     @Rollback(true)
     public void should_create_5k_members_when_no_exception() {
         final var start = new Date();
-        System.out.println();
 
         final List<Member> result = createMockAssemblyService.execute().blockLast();
 
         final var end = new Date();
-        System.out.println("Time to create 5_000 members: " + (end.getTime() - start.getTime()) + "ms");
+        classLogger.debug("Time to create 5_000 members: " + (end.getTime() - start.getTime()) + "ms");
 
         Assert.assertEquals(5_000, result.size());
     }
