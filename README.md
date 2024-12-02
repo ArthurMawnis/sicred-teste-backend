@@ -14,10 +14,6 @@ Some business rules were assumed due to the simplicity requirement on project sc
 
 1. Any agenda CAN HAVE more than one voting session. Eg.: On a 200 member assembly, 100 can vote before the lunch and 100 will vote after their lunch
 2. CPF validation uses the following rules: If this conversion to number is ODD, then, the CPF is UNABLE_TO_VOTE; if its even, the CPF is ABLE_TO_VOTE.
-3. On API versioning (bonus task no. 4): The base URL path does specify the API's version: api/v1, eg. This approach requires that breaking changes come into
- a whole new API. Since most of API resources are heavily dependent on others, this approach isnt prejudicial on most cases.
-4. Accordingly to the requirements, auth as abstract and all endpoint access are allowed.
-5. Due to the simplicity requirement: HATEOAS wasn't implemented. Also, we should use messaging brokers on the vote creation endpoint, so we don't lost the vote data, but this implementation was ommited.
 
 ## Technical decisions
 
@@ -30,6 +26,11 @@ Due to being a NOSQL db, mongo offer us a faster writing operation on cost of th
  Cassandra only for votes inserions. DUE TO THE SIMPLICITY REQUIREMENT, mongodb had the best cost/benefit.
 
 RabbitMQ: It's reliable and has less latency than kafka. 
+
+1. On API versioning (bonus task no. 4): The base URL path does specify the API's version: api/v1, eg. This approach requires that breaking changes come into
+ a whole new API. Since most of API resources are heavily dependent on others, this approach isnt prejudicial on most cases.
+2. Accordingly to the requirements, auth as abstract and all endpoint access are allowed.
+3. Due to the simplicity requirement: HATEOAS wasn't implemented. Also, we should use messaging brokers on the vote creation endpoint, so we don't lost the vote data, but this implementation was ommited.
 
 ## Installation
 
