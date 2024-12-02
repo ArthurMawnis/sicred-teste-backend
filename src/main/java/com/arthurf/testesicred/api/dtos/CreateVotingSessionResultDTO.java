@@ -11,6 +11,7 @@ import jakarta.validation.constraints.NotNull;
 @Schema(name = "CreateVotingSessionResultDTO", description = "Data Transfer Object for creating a voting session result.")
 public class CreateVotingSessionResultDTO implements Serializable {
 
+    @Schema(description = "The identifier of the voting session to be closed.")
     private String sessionId;
 
     /**

@@ -6,6 +6,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 
+
+/**
+ * Data Transfer Object for creating a voting session.
+ */
 @Schema(name = "CreateVotingSessionDTO", description = "Data Transfer Object for creating a voting session.")
 public class CreateVotingSessionDTO implements Serializable {
 
