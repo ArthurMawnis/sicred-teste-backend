@@ -1,4 +1,4 @@
-package com.arthurf.testesicred.api.services;
+package com.arthurf.testesicred.api.services.vote;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

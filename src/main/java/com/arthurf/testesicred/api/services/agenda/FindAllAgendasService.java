@@ -1,4 +1,4 @@
-package com.arthurf.testesicred.api.services;
+package com.arthurf.testesicred.api.services.agenda;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

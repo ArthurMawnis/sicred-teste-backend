@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.arthurf.testesicred.api.dtos.CreateVotingSessionResultDTO;
-import com.arthurf.testesicred.api.services.SaveAgendaVotesResultService;
+import com.arthurf.testesicred.api.services.vote.SaveAgendaVotesResultService;
 import com.google.gson.Gson;
 
 @Component

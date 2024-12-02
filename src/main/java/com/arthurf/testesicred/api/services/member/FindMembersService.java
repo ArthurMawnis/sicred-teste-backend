@@ -1,4 +1,4 @@
-package com.arthurf.testesicred.api.services;
+package com.arthurf.testesicred.api.services.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;

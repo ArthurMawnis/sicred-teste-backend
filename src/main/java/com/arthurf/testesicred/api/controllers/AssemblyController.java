@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arthurf.testesicred.api.models.Member;
-import com.arthurf.testesicred.api.services.CreateMockAssemblyService;
-import com.arthurf.testesicred.api.services.FindMembersService;
+import com.arthurf.testesicred.api.services.member.CreateMockAssemblyService;
+import com.arthurf.testesicred.api.services.member.FindMembersService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import reactor.core.publisher.Flux;

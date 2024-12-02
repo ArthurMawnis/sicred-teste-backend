@@ -1,4 +1,4 @@
-package com.arthurf.testesicred.api.services;
+package com.arthurf.testesicred.api.services.vote;
 
 import java.util.ArrayList;
 import java.util.List;

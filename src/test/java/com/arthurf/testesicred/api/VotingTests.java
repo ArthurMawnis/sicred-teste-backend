@@ -26,7 +26,7 @@ import com.arthurf.testesicred.api.repositories.AgendaVotingResultRepository;
 import com.arthurf.testesicred.api.repositories.MemberRepository;
 import com.arthurf.testesicred.api.repositories.VoteRepository;
 import com.arthurf.testesicred.api.repositories.VotingSessionRepository;
-import com.arthurf.testesicred.api.services.SaveAgendaVotesResultService;
+import com.arthurf.testesicred.api.services.vote.SaveAgendaVotesResultService;
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)

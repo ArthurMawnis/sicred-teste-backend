@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.arthurf.testesicred.api.dtos.CreateAgendaDTO;
 import com.arthurf.testesicred.api.models.Agenda;
 import com.arthurf.testesicred.api.models.AgendaVotingResult;
-import com.arthurf.testesicred.api.services.CreateAgendaService;
-import com.arthurf.testesicred.api.services.FindAgendaVotingResultsService;
-import com.arthurf.testesicred.api.services.FindAllAgendasService;
+import com.arthurf.testesicred.api.services.agenda.CreateAgendaService;
+import com.arthurf.testesicred.api.services.agenda.FindAllAgendasService;
+import com.arthurf.testesicred.api.services.vote.FindAgendaVotingResultsService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;

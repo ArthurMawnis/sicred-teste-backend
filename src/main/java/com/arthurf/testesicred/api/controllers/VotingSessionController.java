@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.arthurf.testesicred.api.dtos.CreateVoteDTO;
 import com.arthurf.testesicred.api.dtos.CreateVotingSessionDTO;
 import com.arthurf.testesicred.api.models.VotingSession;
-import com.arthurf.testesicred.api.services.CreateVoteService;
-import com.arthurf.testesicred.api.services.CreateVotingSessionService;
+import com.arthurf.testesicred.api.services.vote.CreateVoteService;
+import com.arthurf.testesicred.api.services.vote.CreateVotingSessionService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;

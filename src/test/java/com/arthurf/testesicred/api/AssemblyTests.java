@@ -13,7 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.arthurf.testesicred.api.models.Member;
-import com.arthurf.testesicred.api.services.CreateMockAssemblyService;
+import com.arthurf.testesicred.api.services.member.CreateMockAssemblyService;
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
