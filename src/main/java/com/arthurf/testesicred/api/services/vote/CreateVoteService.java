@@ -145,10 +145,12 @@ public class CreateVoteService {
             if (wcre.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
                 throw new BusinessException("The CPF is invalid.", HttpStatus.BAD_REQUEST);
             } else {
-                throw new BusinessException("An error occurred while validating the CPF.", HttpStatus.INTERNAL_SERVER_ERROR);
+                throw new BusinessException("An error occurred while validating the CPF.",
+                        HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } catch (Exception e) {
-            throw new BusinessException("An error occurred while validating the CPF.", HttpStatus.INTERNAL_SERVER_ERROR)
+            throw new BusinessException("An error occurred while validating the CPF.",
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
