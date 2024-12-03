@@ -15,6 +15,8 @@ Some business rules were assumed due to the simplicity requirement on project sc
 1. Any agenda CAN HAVE more than one voting session. Eg.: On a 200 member assembly, 100 can vote before the lunch and 100 will vote after their lunch
 2. CPF validation uses the following rules: If this conversion to number is ODD, then, the CPF is UNABLE_TO_VOTE; if its even, the CPF is ABLE_TO_VOTE.
 
+Performance benchmarks made with JMeter: https://drive.google.com/file/d/1PNgvNZPIIzHMTQ-SCzXse9BQgETmeE1d/view?usp=drive_link
+
 ## Technical decisions
 
 Spring: Efficient on startup and shutdown proccess and can support reactive api model.
